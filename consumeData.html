@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+		<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+	</head>
+	<body>
+	<header>
+		<nav>
+<a href="index.html">index</a>
+		</nav>
+	</header>
+		<section>
+
+		<div id="consumeData">
+<script>
+function reqListener (response) {
+  console.log(response);
+//  var jsonResponse = JSON.parse(response);
+//  console.log(jsonResponse);
+}
+function SendXMLHttpRequest()
+{
+	var xhr = new XMLHttpRequest();
+	//xhr.onload = reqListener;
+	xhr.responseType = "json";
+	xhr.open("POST", "jsondata.json");
+	xhr.onreadystatechange = function() {
+		var status = xhr.status;
+		var data;
+		// http://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
+		if (xhr.readyState == XMLHttpRequest.DONE) { // `DONE`
+		  if (status == 200) {
+			reqListener(this);
+		  } else {
+			errorHandler && errorHandler(status);
+		  }
+		}
+	};
+	xhr.send();
+}
+
+function SendAjaxRequest() {
+  $.ajax({
+	url: "jsondata.json",
+	success: reqListener
+  });
+}
+
+function SendGetRequest() {
+  $.get("jsondata.json", "test data GET", reqListener);
+}
+
+function SendPostRequest() {
+$.support.cors = true;
+  $.post("jsondata.json");
+}
+
+</script>
+		<form>
+		<h3>consume data</h3>
+
+		<button id="btnSendXMLHttpRequest" onclick="SendXMLHttpRequest();return false;">Send XMLHttpRequest!</button>
+		<button id="btnSendAjaxRequest" onclick="SendAjaxRequest();return false;">Send Ajax Request!</button>
+		<button id="btnSendGetRequest" onclick="SendGetRequest();return false;">Send Get Request!</button>
+		<button id="btnSendPostRequest" onclick="SendPostRequest();return false;">Send Post Request!</button>
+		</form>
+		</div>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		function showInTextbox(text)
+		{
+			var txtOutput = document.getElementById("txtOutput")
+			txtOutput.value = text;
+			txtOutput.style.backgroundColor  = "lightGreen";
+			setTimeout(function(){ txtOutput.style.backgroundColor = ""; }, 250);
+		}
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="index.html">index</a>
+			</nav>
+		</header>
+		<section id="json">
+			<h2>JSON</h2>
+			<div>
+			<form id="jsonForm">
+				<input type="text" id="input1" />
+				<input type="text" id="input2" />
+				<button id="submit" type="button" onclick="javascript.jsonSubmit(document.getElementById('jsonForm'))">submit</button>
+			</form>
+			</div>
+			
+			<input type="text" id="txtOutput" style="width:100%" />
+		</section>
+		<section id="array">
+			<h2>Array</h2>
+			<div>
+				<button id="restore" type="button" onclick="javascript.restore(showInTextbox)">restore</button>
+				<button type="button" onclick="javascript.sort(showInTextbox)">sort</button>
+				<button type="button" onclick="javascript.map(showInTextbox)">map</button>
+			</div>
+			
+			<input type="text" id="txtOutput" style="width:100%" />
+		</section>
+		<section id="webWorker">
+			<h2>Web Worker</h2>
+			<p>Count numbers: <output id="webWorkerResult"></output></p>
+			<button onclick="javascript.startWebWorker('countWorker.js')">Start Worker</button> 
+			<button onclick="javascript.stopWebWorker()">Stop Worker</button>
+			<button onclick="javascript.pauseWebWorker()">Pause Worker</button>
+			<button onclick="javascript.continueWebWorker()">Continue Worker</button>
+		</section>
+		<section id="localStorage">
+			<h2>Local Storage</h2>
+			<input id="txtStorageValue" type="text" />
+			<button onclick="localStorage.someValue = document.getElementById('txtStorageValue').value;document.getElementById('txtLocalStorage').innerHTML = localStorage.someValue">Local</button>
+			<button onclick="sessionStorage.someValue = document.getElementById('txtStorageValue').value;document.getElementById('txtSessionStorage').innerHTML = sessionStorage.someValue">Session</button>
+			
+			<div>
+				Local Storage: <output id="txtLocalStorage" />
+			</div>
+			<div>
+				Session Storage: <output id="txtSessionStorage" />
+			</div>
+			
+			<script type="text/javascript">
+				document.getElementById('txtLocalStorage').innerHTML = localStorage.someValue;
+				document.getElementById('txtSessionStorage').innerHTML = sessionStorage.someValue;
+			</script>
+		</section>
+		<section id="event">
+		<h2>Event</h2>
+			<div id="eventDispatcher"></div>
+			<div id="eventListener"></div>
+			<script>
+				var event = new CustomEvent(
+					"newMessage", 
+					{
+						detail: {
+							message: "Message from eventDispatcher!",
+							time: new Date(),
+						},
+						bubbles: true,
+						cancelable: true
+					}
+				);
+				
+				document.addEventListener("newMessage", function(e) {document.getElementById("eventListener").innerHTML = e.detail.message}, false);
+				document.getElementById("eventDispatcher").dispatchEvent(event);
+			</script>
+			
+		</section>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		function paintCanvas()
+		{
+			var c=document.getElementById("myCanvas");
+			var ctx=c.getContext("2d");
+			ctx.fillStyle="#FF0000";
+			ctx.fillRect(0,0,150,75);
+			ctx.fillStyle="#00FF00";
+			ctx.fillRect(100,100,150,75);
+		}
+		
+		function paintArc()
+		{
+			var cvs = document.getElementById("myCanvas");
+			var ctx = cvs.getContext("2d");
+			ctx.lineWidth = 5;
+			ctx.fillStyle = "f0f";
+			ctx.beginPath();
+			ctx.moveTo(160, 160);
+			ctx.arc(160,160, 150, (135*Math.PI)/180, (45*Math.PI) / 180);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			ctx.clearRect(140, 100, 40, 40);
+		}
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="index.html">index</a>
+			</nav>
+		</header>
+		<section id="canvas">
+			<button id="paintCanvas" onclick="paintCanvas()">Paint canvas</button>
+			<button id="paintArc" onclick="paintArc()">Paint arc</button>
+			<h2>Canvas</h2>
+			<canvas id="myCanvas" width="500" height="500"></canvas>
+		</section>
+	</body>
+</html>

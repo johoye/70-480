@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="index.html">index</a>
+			</nav>
+		</header>
+		<section id="prototype">
+			<h2>Js - Prototype</h2>
+			
+			<script type="text/javascript">
+			function o(text)
+			{
+				console.log(text);
+			}
+			
+			//Define a functional object to hold persons in javascript
+			var Person = function(name) {
+				this.name = name;
+			};
+
+			//Add dynamically to the already defined object a new getter
+			Person.prototype.getName = function() {
+				return this.name;
+			};
+
+			//Create a new object of type Person
+			var john = new Person("John");
+
+			//Try the getter
+			o(john.getName());
+
+			//If now I modify person, also John gets the updates
+			Person.prototype.sayMyName = function() {
+				o('Hello, my name is ' + this.getName());
+			};
+
+			//Call the new method on john
+			john.sayMyName();
+			
+			//Create a new object of type Customer by defining its constructor. It's not 
+			//related to Person for now.
+			var Customer = function(name) {
+				this.name = name;
+			};
+
+			//Now I link the objects and to do so, we link the prototype of Customer to 
+			//a new instance of Person. The protype is the base that will be used to 
+			//construct all new instances and also, will modify dynamically all already 
+			//constructed objects because in Javascript objects retain a pointer to the 
+			//prototype
+			Customer.prototype = new Person();     
+
+			//Now I can call the methods of Person on the Customer, let's try, first 
+			//I need to create a Customer.
+			var myCustomer = new Customer('Dream Inc.');
+			myCustomer.sayMyName();
+
+			//If I add new methods to Person, they will be added to Customer, but if I
+			//add new methods to Customer they won't be added to Person. Example:
+			Customer.prototype.setAmountDue = function(amountDue) {
+				this.amountDue = amountDue;
+			};
+			Customer.prototype.getAmountDue = function() {
+				return this.amountDue;
+			};
+
+			//Let's try:       
+			myCustomer.setAmountDue(2000);
+			o(myCustomer.getAmountDue());
+			</script>
+		</section>
+	</body>
+</html>

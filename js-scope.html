@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		function showInTextbox(text)
+		{
+			var txtOutput = document.getElementById("txtOutput")
+			txtOutput.value = text;
+			txtOutput.style.backgroundColor  = "lightGreen";
+			setTimeout(function(){ txtOutput.style.backgroundColor = ""; }, 250);
+		}
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="index.html">index</a>
+			</nav>
+		</header>
+		<section id="scope">
+			<h2>Js - Scope</h2>
+			<button id="a" onclick="a();">a</button>
+			<button id="b" onclick="b();">b</button>
+			<button id="a2">a2</button>
+			<button id="b2">b2</button>
+			<button id="a3">a3</button>
+			<button id="b3">b3</button>
+			<button id="a4">a4</button>
+			
+			<script type="text/javascript">
+			function o(text)
+			{
+				console.log(text);
+			}
+			
+			o(this);
+			
+			var a = function() {
+				o(this);
+			}
+			a();
+			
+			function b() {
+				o(this);
+			}
+			b();
+			
+			a2.addEventListener("click", a);
+			b2.addEventListener("click", b);
+			
+			a3.onclick = a;
+			b3.onclick = b;
+			
+			a4.addEventListener("click", function() {
+				o(this);
+			});
+			
+			function Loader1() {
+				this.status = "ready";
+				this.temp = 50;
+				this.updateStatus = function (newStatus) {
+					this.status = newStatus;
+				};
+			}
+			function Loader2() {
+				//this.prototype.status = "ready";
+				this.temp = 50;
+				this.updateStatus = function (newStatus) {
+					this.status = newStatus;
+				};
+			}
+			function Loader3() {
+				status = "ready";
+				this.temp = 50;
+				this.updateStatus = function (newStatus) {
+					status = newStatus;
+				};
+			}
+			function Loader4() {
+				window.status = "ready";
+				this.temp = 50;
+				this.updateStatus = function (newStatus) {
+					status = newStatus;
+				};
+			}
+			
+			var loader1 = new Loader1();
+			var loader2 = new Loader2();
+			var loader3 = new Loader3();
+			var loader4 = new Loader4();
+			</script>
+		<h3>Loader</h3>
+			<button id="l1" onclick="loader1.updateStatus('nyStatus');o(loader1.status);o(status)">Loader1</button>
+			<button id="l2" onclick="loader2.updateStatus('nyStatus');o(loader2.status);o(status)">Loader2</button>
+			<button id="l3" onclick="loader3.updateStatus('nyStatus');o(loader3.status);o(status)">Loader3</button>
+			<button id="l4" onclick="loader4.updateStatus('nyStatus');o(loader4.status);o(status)">Loader4</button>
+		</section>
+	</body>
+</html>

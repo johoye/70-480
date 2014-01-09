@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# 2013-11-13 v1.0.1
+
+CACHE:
+/style.css
+/script.js
+/video/movie.mp4
+/video/movie.ogg
+
+NETWORK:
+*
+
+FALLBACK:
+/ /html5-appcache-offline.html

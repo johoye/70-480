@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Exam 70-480: Programming in HTML5 with JavaScript and CSS3</title>
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<script src="script.js" type="text/javascript"></script>
+		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript">
+		function submitFunksjon(form)
+		{
+			var a = $(form).serializeArray();
+			console.log(a);
+			var d = JSON.stringify(a);
+			console.log(d);
+			for(var i = 0;i<a.length;i++)
+			{
+			var b = JSON.stringify(a[i]);
+			console.log(b);
+			}
+		}
+
+		</script>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="index.html">index</a>
+			</nav>
+		</header>
+		<section id="json">
+			<h2>JSON</h2>
+			<div>
+			<form id="jsonForm">
+				<input type="text" id="input1" name="inputName1"/>
+				<input type="text" id="input2" name="inputName2"/>
+				<button id="submit1" type="button" onclick="submitFunksjon(document.getElementById('jsonForm'))">submit1</button>
+				<button id="submit2" type="submit">submit2</button>
+				
+				
+				<a><img /></a>
+				<a></a>
+				<a></a>
+				<a><img /></a>
+			</form>
+			</div>
+			
+			<input type="text" id="txtOutput" style="width:100%" />
+			
+		<script type="text/javascript">
+		$("a img").each(function() {
+			$(this).parent().attr('target', '_blank');
+		});
+		</script>
+		</section>
+	</body>
+</html>
